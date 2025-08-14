@@ -24,6 +24,11 @@
 
           <ion-card-content>
             Here's a small text description for the card content. Nothing more, nothing less.
+
+            <ion-button size="small" [routerLink]="['/listado-dispositivos', dispositivo.dispositivoId]">
+              Detalles
+              <!-- <ion-icon name="add-outline"></ion-icon> -->
+            </ion-button>
           </ion-card-content>
         </ion-card>
       </ion-item>

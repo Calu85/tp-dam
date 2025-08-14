@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonList, IonTitle, IonToolbar, IonButton, IonIte
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
 import { interval, Observable, Subscription, fromEvent } from 'rxjs';
 import { DispositivoService } from '../services/dispositivo.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listado-dispositivos',
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./listado-dispositivos.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonList, IonToolbar, CommonModule, FormsModule, IonButton, IonItem, IonLabel, 
-          IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle ], 
+          IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, RouterLink ], 
 })
 export class ListadoDispositivosPage implements OnInit, OnDestroy {
 
