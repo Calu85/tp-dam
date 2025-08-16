@@ -57,27 +57,27 @@ var cb2 = function (req, res, next) {
     res.send({'mensaje': 'Hola DAM!'}).status(200)
 }
 
-app.post('/login', (req, res) => {
-    if (req.body) {
-        var userData = req.body
+// app.post('/login', (req, res) => {
+//     if (req.body) {
+//         var userData = req.body
 
-        if (testUser.username === userData.username && testUser.password === userData.password) {
-            var token = jwt.sign(userData, YOUR_SECRET_KEY)
-            res.status(200).send({
-                signed_user: userData,
-                token: token
-            })
-        } else {
-            res.status(403).send({
-                errorMessage: 'Auth required'
-            })
-        }
-    } else {
-        res.status(403).send({
-            errorMessage: 'Se requiere un usuario y contraseña'
-        })
-    }
-})
+//         if (testUser.username === userData.username && testUser.password === userData.password) {
+//             var token = jwt.sign(userData, YOUR_SECRET_KEY)
+//             res.status(200).send({
+//                 signed_user: userData,
+//                 token: token
+//             })
+//         } else {
+//             res.status(403).send({
+//                 errorMessage: 'Auth required'
+//             })
+//         }
+//     } else {
+//         res.status(403).send({
+//             errorMessage: 'Se requiere un usuario y contraseña'
+//         })
+//     }
+// })
 
 app.get('/prueba', authenticator, function(req, res) {
     res.send({message: 'Está autenticado, accede a los datos'})

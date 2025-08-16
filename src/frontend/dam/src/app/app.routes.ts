@@ -7,13 +7,13 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
     canActivate: [authGuard]
   },
-  {
-    path: 'login',
-    loadComponent: () => import('./login/login.page').then((m) => m.LoginPage)
-  },
+  // {
+  //   path: 'login',
+  //   loadComponent: () => import('./login/login.page').then((m) => m.LoginPage)
+  // },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   // {
