@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-// import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -12,10 +11,6 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
-  // {
-  //   path: 'listado-dispositivos',
-  //   loadComponent: () => import('./listado-dispositivos/listado-dispositivos.page').then( m => m.ListadoDispositivosPage),
-  // },
   {
     path: 'listado-dispositivos/:id',
     loadComponent: () => import('./listado-dispositivos/listado-dispositivos.page').then( m => m.ListadoDispositivosPage),
