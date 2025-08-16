@@ -17,33 +17,29 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class ListadoDispositivosPage implements OnInit, OnDestroy {
 
-  dispositivos: any = []
+  dispositivo: any = null;  // 👈 just one
 
-  mouseMove$ = fromEvent(document, 'mousemove')
-  @Input()
-  id = '';
-
-  ionViewWillEnter () {
-    console.log(this._actRouter.snapshot.paramMap.get('id'))
-  }
-
-  constructor(public dispositivoService: DispositivoService,
-              private _actRouter: ActivatedRoute) {
-  }
+  constructor(
+    public dispositivoService: DispositivoService,
+    private _actRouter: ActivatedRoute
+  ) {}
 
   async ngOnInit() {
+    // Get the id from route params
+    const id = this._actRouter.snapshot.paramMap.get('id');
+    console.log("Device ID from route:", id);
+
+    // Fetch all dispositivos (you could also make a service method to get one by ID)
     await this.dispositivoService.getDispositivos()
-      .then((res) => {
-        this.dispositivos = res
-        console.log("dispositivos", this.dispositivos)
-        console.log("La promesa resolvió")
+      .then((res: any[]) => {
+        // Find the one with the same id
+        this.dispositivo = res.find(d => d.dispositivoId == id);
+        console.log("Selected dispositivo:", this.dispositivo);
       })
       .catch((error) => {
-        console.log(error)
-      })
-    console.log("Ejecución fuera de la promesa")
+        console.log(error);
+      });
   }
 
-  ngOnDestroy() {
-  }
+  ngOnDestroy() {}
 }
