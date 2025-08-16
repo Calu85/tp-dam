@@ -14,9 +14,9 @@ export class InterceptorService implements HttpInterceptor {
     console.log('Estoy en el interceptor')
     console.log(req)
 
-    if (req.url.includes('/login')) {
-      return next.handle(req)
-    }
+    // if (req.url.includes('/login')) {
+    //   return next.handle(req)
+    // }
 
     const token = localStorage.getItem('token')
 
