@@ -16,11 +16,11 @@ export const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full',
   },
-  {
-    path: 'listado-dispositivos',
-    loadComponent: () => import('./listado-dispositivos/listado-dispositivos.page').then( m => m.ListadoDispositivosPage),
-    canActivate: [authGuard]
-  },
+  // {
+  //   path: 'listado-dispositivos',
+  //   loadComponent: () => import('./listado-dispositivos/listado-dispositivos.page').then( m => m.ListadoDispositivosPage),
+  //   canActivate: [authGuard]
+  // },
   {
     path: 'listado-dispositivos/:id',
     loadComponent: () => import('./listado-dispositivos/listado-dispositivos.page').then( m => m.ListadoDispositivosPage),

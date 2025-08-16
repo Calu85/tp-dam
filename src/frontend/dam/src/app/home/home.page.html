@@ -1,23 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      poner algo acá
-    </ion-title>
+    <ion-title>Sistema de riego</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <!-- <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">AlgunTitulo</ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header> -->
 
-  <div id="container">
-    <ion-list>
+  <ion-list>
+    @for (dispositivo of dispositivos; track dispositivo) {
       <ion-item>
-        <a routerLink="/listado-dispositivos/1" routerLinkActive="active" ariaCurrentWhenActive="page">BOTONAZO</a>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ dispositivo.nombre }}</ion-card-title>
+            <ion-card-subtitle>{{ dispositivo.ubicacion }}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            Here's a small text description for the card content. Nothing more, nothing less.
+
+            <ion-button size="small" [routerLink]="['/listado-dispositivos', dispositivo.dispositivoId]">
+              Detalles
+              <!-- <ion-icon name="add-outline"></ion-icon> -->
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
       </ion-item>
-    </ion-list>
-  </div>
+    }
+  </ion-list>
 </ion-content>
