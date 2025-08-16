@@ -17,12 +17,9 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class ListadoDispositivosPage implements OnInit, OnDestroy {
 
-  // observable$: Observable<any>
-  // subscription: Subscription
   dispositivos: any = []
 
   mouseMove$ = fromEvent(document, 'mousemove')
-
   @Input()
   id = '';
 
@@ -32,25 +29,7 @@ export class ListadoDispositivosPage implements OnInit, OnDestroy {
 
   constructor(public dispositivoService: DispositivoService,
               private _actRouter: ActivatedRoute) {
-    // this.observable$ = interval(1000)
-    // this.subscription = this.observable$.subscribe((value) => {
-    //   console.log(value)
-    // })
-
-    // this.subscription = this.mouseMove$.subscribe((evt: any) => {
-    //   console.log(`Mouse en: ${evt.clientX} x ${evt.clientY} y`)
-    // })
   }
-
-  // subscribe () {
-  //   this.subscription = this.mouseMove$.subscribe((evt: any) => {
-  //     console.log(`Coordenadas de algo: ${evt.clientX} x ${evt.clientY} y`)
-  //   })
-  // }
-
-  // unsubscribe () {
-  //   this.subscription.unsubscribe()
-  // }
 
   async ngOnInit() {
     await this.dispositivoService.getDispositivos()
@@ -62,11 +41,9 @@ export class ListadoDispositivosPage implements OnInit, OnDestroy {
       .catch((error) => {
         console.log(error)
       })
-    // Acá pongo código que debería ejecutarse con this.dispositivos conteniendo un arreglo de dispositivos
     console.log("Ejecución fuera de la promesa")
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe()
   }
 }
