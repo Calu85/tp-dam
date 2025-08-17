@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Detalles dispositivo</ion-title>
+    <ion-title>Mediciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Detalles dispositivo</ion-title>
+      <ion-title size="large">Mediciones</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -19,12 +19,8 @@
       </ion-card-header>
 
       <ion-card-content>
-        <p><strong>ID:</strong> {{ dispositivo.dispositivoId }}</p>
-        <p><strong>Ubicación:</strong> {{ dispositivo.ubicacion }}</p>
-        <p><strong>Otra info…</strong></p>
-        
-        <ion-button size="small" [routerLink]="['/mediciones', dispositivo.dispositivoId]">
-          Mediciones
+        <ion-button size="small" [routerLink]="['/listado-dispositivos', dispositivo.dispositivoId]">
+          Volver
         </ion-button>
       </ion-card-content>
     </ion-card>

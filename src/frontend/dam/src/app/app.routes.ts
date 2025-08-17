@@ -14,5 +14,9 @@ export const routes: Routes = [
   {
     path: 'listado-dispositivos/:id',
     loadComponent: () => import('./listado-dispositivos/listado-dispositivos.page').then( m => m.ListadoDispositivosPage),
-  }
+  },
+  {
+    path: 'mediciones/:id',
+    loadComponent: () => import('./mediciones/mediciones.page').then( m => m.MedicionesPage)
+  },
 ];
