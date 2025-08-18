@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
-import { ActivatedRoute } from '@angular/router';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton } from '@ionic/angular/standalone';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DispositivoService } from '../services/dispositivo.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { DispositivoService } from '../services/dispositivo.service';
   templateUrl: './mediciones.page.html',
   styleUrls: ['./mediciones.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel],
+  imports: [CommonModule, IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton, RouterLink],
 })
 export class MedicionesPage implements OnInit {
 
@@ -25,11 +25,10 @@ export class MedicionesPage implements OnInit {
     // Subscribe to route param changes
     this._actRouter.paramMap.subscribe(async params => {
       this.dispositivoId = params.get('id');
-      console.log("Reactive param id:", this.dispositivoId);
 
       if (this.dispositivoId) {
         try {
-          console.log("Calling backend: http://localhost:8000/mediciones/" + this.dispositivoId);
+          //console.log("Llamada al backend: http://localhost:8000/mediciones/" + this.dispositivoId);
           this.mediciones = await this.dispositivoService.getMedicionesByDispositivoId(+this.dispositivoId);
           console.log("Mediciones:", this.mediciones);
         } catch (err) {
