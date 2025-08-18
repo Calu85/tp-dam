@@ -13,4 +13,10 @@ export class DispositivoService {
     // return firstValueFrom(this._http.get("http://localhost:8000/dispositivos"))
     return firstValueFrom(this._http.get<any[]>("http://localhost:8000/dispositivos"))
   }
+
+  getMedicionesByDispositivoId(id: number) {
+  return firstValueFrom(
+    this._http.get<any[]>(`http://localhost:8000/mediciones/${id}`)
+  );
+}
 }

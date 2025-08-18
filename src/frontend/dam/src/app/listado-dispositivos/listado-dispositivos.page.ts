@@ -17,7 +17,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class ListadoDispositivosPage implements OnInit, OnDestroy {
 
-  dispositivo: any = null;  // 👈 just one
+  dispositivo: any = null; 
 
   constructor(
     public dispositivoService: DispositivoService,
@@ -25,16 +25,15 @@ export class ListadoDispositivosPage implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
-    // Get the id from route params
-    const id = this._actRouter.snapshot.paramMap.get('id');
-    console.log("Device ID from route:", id);
 
-    // Fetch all dispositivos (you could also make a service method to get one by ID)
+    const id = this._actRouter.snapshot.paramMap.get('id');
+    console.log("Id del dispositivo", id);
+
     await this.dispositivoService.getDispositivos()
       .then((res: any[]) => {
         // Find the one with the same id
         this.dispositivo = res.find(d => d.dispositivoId == id);
-        console.log("Selected dispositivo:", this.dispositivo);
+        console.log("Dispositivo seleccionado:", this.dispositivo);
       })
       .catch((error) => {
         console.log(error);

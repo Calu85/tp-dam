@@ -89,5 +89,5 @@ typings/
 
 db/data/
 src/frontend/js
-
+.vscode/
 
