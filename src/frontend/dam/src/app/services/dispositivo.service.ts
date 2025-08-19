@@ -14,11 +14,10 @@ export class DispositivoService {
     return firstValueFrom(this._http.get<any[]>("http://localhost:8000/dispositivos"))
   };
 
-  postDispositivo(estadoValvula: boolean, medicion: number, id: number) {
+  postDispositivo(estadoValvula: boolean, id: number) {
     const dataToSend = {
       id: id,
       estadoValvula: estadoValvula,
-      medicion: medicion
     };
     return firstValueFrom(this._http.post<any[]>(`http://localhost:8000/dispositivos/${id}`, dataToSend))
   };
