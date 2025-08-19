@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@angular/core": "^20.1.7",
+    "tslib": "^2.8.1"
+  }
+}

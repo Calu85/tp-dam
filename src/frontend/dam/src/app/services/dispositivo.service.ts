@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { Medicion } from '../interfaces/medicion';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class DispositivoService {
 
   getMedicionesByDispositivoId(id: number) {
     return firstValueFrom(this._http.get<any[]>(`http://localhost:8000/mediciones/${id}`));
+  }
+
+  async getLastMedicionByDispositivoId(dispositivoId: number) {
+    return firstValueFrom(this._http.get<Medicion>(`http://localhost:8000/dispositivos/${dispositivoId}`));
   }
 }

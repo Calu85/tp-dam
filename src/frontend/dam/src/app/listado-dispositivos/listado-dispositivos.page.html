@@ -21,6 +21,11 @@
       <ion-card-content>
         <p><strong>ID:</strong> {{ dispositivo.dispositivoId }}</p>
         <p><strong>Ubicación:</strong> {{ dispositivo.ubicacion }}</p>
+        @if (lastMeasurementDate) {
+          <p>
+            <strong>Última medición:</strong> {{ lastMeasurementDate | tiempoAtras }} — Valor: {{ lastMeasurementValue }}
+          </p>
+        }
         <ion-toggle [(ngModel)]="estadoValvula"  (ionChange)="onToggle()"> Válvula </ion-toggle>
         
         <ion-button size="small" [routerLink]="['/mediciones', dispositivo.dispositivoId]">

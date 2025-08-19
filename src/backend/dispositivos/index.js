@@ -40,4 +40,19 @@ routerDispositivos.post('/dispositivos/:id', (req, res) => {
   });
 });
 
+routerDispositivos.get('/dispositivos/:id', (req, res) => {
+  const dispositivoId = req.params.id;
+  const sql = 'SELECT * FROM Mediciones WHERE dispositivoId = ? ORDER BY fecha DESC LIMIT 1';
+
+  pool.query(sql, [dispositivoId], (err, results) => {
+    if (err) {
+      console.error("DB error:", err);
+      res.status(500).json(err);
+    } else {
+      res.json(results[0] || null); // send the single latest measurement
+    }
+  });
+  console.log("hola");
+});
+
 module.exports = routerDispositivos
