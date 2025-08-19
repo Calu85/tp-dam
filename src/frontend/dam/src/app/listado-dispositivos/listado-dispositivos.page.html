@@ -21,7 +21,7 @@
       <ion-card-content>
         <p><strong>ID:</strong> {{ dispositivo.dispositivoId }}</p>
         <p><strong>Ubicación:</strong> {{ dispositivo.ubicacion }}</p>
-        <ion-toggle> Válvula </ion-toggle>
+        <ion-toggle (ionChange)="onToggle()"> Válvula </ion-toggle>
         
         <ion-button size="small" [routerLink]="['/mediciones', dispositivo.dispositivoId]">
           Mediciones

@@ -39,5 +39,11 @@ export class ListadoDispositivosPage implements OnInit, OnDestroy {
       });
   }
 
+  async onToggle() {
+    const id = this._actRouter.snapshot.paramMap.get('id');
+    console.log("Toggle apretado");
+    await this.dispositivoService.postDispositivo(true,1,1)
+  }
+
   ngOnDestroy() {}
 }

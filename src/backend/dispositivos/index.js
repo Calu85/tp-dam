@@ -26,4 +26,18 @@ routerDispositivos.get('/mediciones/:id', (req, res) => {
   });
 });
 
+routerDispositivos.post('/dispositivos/:id', (req, res) => {
+  const id = req.params.id;                        
+  const estadoValvula = req.body.estadoValvula;        
+  pool.query('INSERT INTO Log_Riegos (apertura, fecha, electrovalvulaId) VALUES (?, NOW(), ?)',
+    [estadoValvula, id], (err, results) => {
+      if (err) {
+        console.error("DB error:", err);
+        res.status(500).json(err);
+      } else {
+        res.json(results);
+      }
+  });
+});
+
 module.exports = routerDispositivos
