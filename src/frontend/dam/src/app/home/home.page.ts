@@ -5,13 +5,14 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle }
 import { fromEvent } from 'rxjs';
 import { DispositivoService } from '../services/dispositivo.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonList, IonToolbar, CommonModule, IonButton, IonItem, IonLabel, 
-          IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, RouterLink ], 
+          IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, RouterLink], 
 })
 export class HomePage {
   dispositivos: any = []

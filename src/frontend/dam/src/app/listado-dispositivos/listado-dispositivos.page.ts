@@ -7,6 +7,7 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle }
 import { DispositivoService } from '../services/dispositivo.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TiempoAtrasPipe } from '../tiempo-atras.pipe'; 
+import { ValveStatusDirective } from '../directives/cambiar-color.directives';
 
 @Component({
   selector: 'app-listado-dispositivos',
@@ -14,7 +15,7 @@ import { TiempoAtrasPipe } from '../tiempo-atras.pipe';
   styleUrls: ['./listado-dispositivos.page.scss'],
   standalone: true,
   imports: [TiempoAtrasPipe, FormsModule, IonContent, IonHeader, IonTitle, IonList, IonToolbar, CommonModule, IonButton, IonItem, IonLabel, 
-          IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, RouterLink, IonToggle], 
+          IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, RouterLink, IonToggle, ValveStatusDirective], 
 })
 export class ListadoDispositivosPage implements OnInit, OnDestroy {
 

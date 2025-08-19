@@ -26,7 +26,11 @@
             <strong>Última medición:</strong> {{ lastMeasurementDate | tiempoAtras }} — Valor: {{ lastMeasurementValue }}
           </p>
         }
-        <ion-toggle [(ngModel)]="estadoValvula"  (ionChange)="onToggle()"> Válvula </ion-toggle>
+        <ion-label [appValveStatus]="estadoValvula">
+          {{ estadoValvula ? 'Válvula abierta' : 'Válvula cerrada' }}
+        </ion-label>
+        <ion-toggle [(ngModel)]="estadoValvula" (ionChange)="onToggle()"></ion-toggle>
+        <!-- <ion-toggle [(ngModel)]="estadoValvula"  (ionChange)="onToggle()"> Válvula </ion-toggle> -->
         
         <ion-button size="small" [routerLink]="['/mediciones', dispositivo.dispositivoId]">
           Mediciones
