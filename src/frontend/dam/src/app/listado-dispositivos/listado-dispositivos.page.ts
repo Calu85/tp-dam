@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonList, IonTitle, IonToolbar, IonButton, IonItem, IonLabel, IonToggle } from '@ionic/angular/standalone';
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
 import { interval, Observable, Subscription, fromEvent } from 'rxjs';
@@ -11,12 +12,13 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   templateUrl: './listado-dispositivos.page.html',
   styleUrls: ['./listado-dispositivos.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonList, IonToolbar, CommonModule, IonButton, IonItem, IonLabel, 
+  imports: [FormsModule, IonContent, IonHeader, IonTitle, IonList, IonToolbar, CommonModule, IonButton, IonItem, IonLabel, 
           IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, RouterLink, IonToggle], 
 })
 export class ListadoDispositivosPage implements OnInit, OnDestroy {
 
   dispositivo: any = null; 
+  estadoValvula: boolean = false;
 
   constructor(
     public dispositivoService: DispositivoService,
@@ -41,8 +43,9 @@ export class ListadoDispositivosPage implements OnInit, OnDestroy {
 
   async onToggle() {
     const id = this._actRouter.snapshot.paramMap.get('id');
+    const estadoValvula = this.estadoValvula;
     console.log("Toggle apretado");
-    await this.dispositivoService.postDispositivo(true,Number(id))
+    await this.dispositivoService.postDispositivo(estadoValvula,Number(id))
   }
 
   ngOnDestroy() {}
