@@ -22,13 +22,11 @@ export class MedicionesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Subscribe to route param changes
     this._actRouter.paramMap.subscribe(async params => {
       this.dispositivoId = params.get('id');
 
       if (this.dispositivoId) {
         try {
-          //console.log("Llamada al backend: http://localhost:8000/mediciones/" + this.dispositivoId);
           this.mediciones = await this.dispositivoService.getMedicionesByDispositivoId(+this.dispositivoId);
           console.log("Mediciones:", this.mediciones);
         } catch (err) {

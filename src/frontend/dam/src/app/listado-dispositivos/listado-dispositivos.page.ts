@@ -34,9 +34,9 @@ export class ListadoDispositivosPage implements OnInit, OnDestroy {
     const id = this._actRouter.snapshot.paramMap.get('id');
     console.log("Id del dispositivo", id);
 
+    //Cargo los datos del dispositivo (creo que este paso debería evitarse)
     await this.dispositivoService.getDispositivos()
       .then((res: any[]) => {
-        // Find the one with the same id
         this.dispositivo = res.find(d => d.dispositivoId == id);
         console.log("Dispositivo seleccionado:", this.dispositivo);
       })
@@ -44,12 +44,18 @@ export class ListadoDispositivosPage implements OnInit, OnDestroy {
         console.log(error);
       });
       console.log("Dispositivo ID:", this.dispositivo.dispositivoId);
-    await this.dispositivoService.getLastMedicionByDispositivoId(+this.dispositivo.dispositivoId)
+
+    //Cargo la última medición  
+    await this.dispositivoService.getLastMedicionByDispositivoId(Number(id))
       .then(lastMedicion => {
-        console.log('lastMedicion:', lastMedicion);
         this.lastMeasurementDate = new Date(lastMedicion.fecha);
         this.lastMeasurementValue = lastMedicion.valor;
       })
+    // Cargo el estado de la válvula
+    await this.dispositivoService.getEstadoValvula(Number(id))
+    .then(res => {
+      this.estadoValvula = res.estadoValvula;
+    });
   }
 
   async onToggle() {

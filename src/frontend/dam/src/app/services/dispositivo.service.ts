@@ -11,7 +11,6 @@ export class DispositivoService {
   constructor(private _http: HttpClient) { }
 
   getDispositivos () {
-    // return firstValueFrom(this._http.get("http://localhost:8000/dispositivos"))
     return firstValueFrom(this._http.get<any[]>("http://localhost:8000/dispositivos"))
   };
 
@@ -30,4 +29,11 @@ export class DispositivoService {
   async getLastMedicionByDispositivoId(dispositivoId: number) {
     return firstValueFrom(this._http.get<Medicion>(`http://localhost:8000/dispositivos/${dispositivoId}`));
   }
+
+  getEstadoValvula(valvulaId: number) {
+    return firstValueFrom(
+      this._http.get<{ estadoValvula: boolean }>(`http://localhost:8000/dispositivos/${valvulaId}/estado`)
+    );
+  }
+
 }

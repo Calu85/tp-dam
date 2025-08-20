@@ -40,7 +40,6 @@ export class HomePage {
       .catch((error) => {
         console.log(error)
       })
-    // Acá pongo código que debería ejecutarse con this.dispositivos conteniendo un arreglo de dispositivos
     console.log("Ejecución fuera de la promesa")
   }
 

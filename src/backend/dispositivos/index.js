@@ -42,7 +42,6 @@ routerDispositivos.post('/dispositivos/:id', (req, res) => {
         return res.status(500).json(err);
       }
 
-      // Insert into Log_Riegos
       connection.query(
         'INSERT INTO Log_Riegos (apertura, fecha, electrovalvulaId) VALUES (?, NOW(), ?)',
         [estadoValvula, id],
@@ -54,7 +53,6 @@ routerDispositivos.post('/dispositivos/:id', (req, res) => {
             });
           }
 
-          // Insert into Mediciones
           connection.query(
             'INSERT INTO Mediciones (fecha, valor, dispositivoId) VALUES (NOW(), ?, ?)',
             [valor, id],
@@ -66,7 +64,6 @@ routerDispositivos.post('/dispositivos/:id', (req, res) => {
                 });
               }
 
-              // Commit both inserts
               connection.commit(err => {
                 if (err) {
                   return connection.rollback(() => {
@@ -98,10 +95,34 @@ routerDispositivos.get('/dispositivos/:id', (req, res) => {
       console.error("DB error:", err);
       res.status(500).json(err);
     } else {
-      res.json(results[0] || null); // send the single latest measurement
+      res.json(results[0] || null);
     }
   });
-  console.log("hola");
+});
+
+routerDispositivos.get('/dispositivos/:id/estado', (req, res) => {
+  const dispositivoId = req.params.id;
+
+  const sql = `
+    SELECT apertura 
+    FROM Log_Riegos 
+    WHERE electrovalvulaId = ? 
+    ORDER BY fecha DESC 
+    LIMIT 1
+  `;
+
+  pool.query(sql, [dispositivoId], (err, results) => {
+    if (err) {
+      console.error("DB error:", err);
+      return res.status(500).json(err);
+    }
+
+    if (results.length > 0) {
+      res.json({ estadoValvula: results[0].apertura === 1 }); // return boolean
+    } else {
+      res.json({ estadoValvula: false }); // default if no records
+    }
+  });
 });
 
 module.exports = routerDispositivos

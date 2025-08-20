@@ -9,7 +9,6 @@ const routerDispositivos = require('./dispositivos/index')
 var app = express();
 
 const corsOptions = {
-    // Solo para desarrollo
     origin: '*',
 }
 
