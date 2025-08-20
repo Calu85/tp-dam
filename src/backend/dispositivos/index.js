@@ -27,18 +27,67 @@ routerDispositivos.get('/mediciones/:id', (req, res) => {
 });
 
 routerDispositivos.post('/dispositivos/:id', (req, res) => {
-  const id = req.params.id;                        
-  const estadoValvula = req.body.estadoValvula;        
-  pool.query('INSERT INTO Log_Riegos (apertura, fecha, electrovalvulaId) VALUES (?, NOW(), ?)',
-    [estadoValvula, id], (err, results) => {
+  const id = req.params.id;
+  const estadoValvula = req.body.estadoValvula;
+  const valor = Math.floor(Math.random() * 100);
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error("DB connection error:", err);
+      return res.status(500).json(err);
+    }
+
+    connection.beginTransaction(err => {
       if (err) {
-        console.error("DB error:", err);
-        res.status(500).json(err);
-      } else {
-        res.json(results);
+        connection.release();
+        return res.status(500).json(err);
       }
+
+      // Insert into Log_Riegos
+      connection.query(
+        'INSERT INTO Log_Riegos (apertura, fecha, electrovalvulaId) VALUES (?, NOW(), ?)',
+        [estadoValvula, id],
+        (err, logResults) => {
+          if (err) {
+            return connection.rollback(() => {
+              connection.release();
+              res.status(500).json(err);
+            });
+          }
+
+          // Insert into Mediciones
+          connection.query(
+            'INSERT INTO Mediciones (fecha, valor, dispositivoId) VALUES (NOW(), ?, ?)',
+            [valor, id],
+            (err, medResults) => {
+              if (err) {
+                return connection.rollback(() => {
+                  connection.release();
+                  res.status(500).json(err);
+                });
+              }
+
+              // Commit both inserts
+              connection.commit(err => {
+                if (err) {
+                  return connection.rollback(() => {
+                    connection.release();
+                    res.status(500).json(err);
+                  });
+                }
+                connection.release();
+                res.json({
+                  logInsert: logResults,
+                  medicionInsert: medResults
+                });
+              });
+            }
+          );
+        }
+      );
+    });
   });
 });
+
 
 routerDispositivos.get('/dispositivos/:id', (req, res) => {
   const dispositivoId = req.params.id;
